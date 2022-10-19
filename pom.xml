@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.datastax.spring</groupId>
+	<artifactId>spring-dse-parent</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+	<name>spring-dse</name>
+	<packaging>pom</packaging>
+	
+	<modules>
+		<module>sample-commons</module>
+		<module>sample-web</module>
+		<module>sample-reactive</module>
+	</modules>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- Spring -->
+		<spring-boot.version>2.7.4</spring-boot.version>
+	
+		<!-- Drivers -->
+		<java-driver.version>4.15.0</java-driver.version>
+		<jackson.version>2.13.4</jackson.version>
+		<logback.version>1.2.11</logback.version>
+		<slf4j.version>1.7.36</slf4j.version>
+		
+		<!-- Junit -->
+		<junit-platform.version>1.9.1</junit-platform.version>
+		<junit-jupiter.version>5.9.1</junit-jupiter.version>
+		
+		<!-- Java -->
+		<maven.plugin.compiler.source>17</maven.plugin.compiler.source>
+		<maven.plugin.compiler.target>17</maven.plugin.compiler.target>
+		<maven.plugin.javadoc.source>17</maven.plugin.javadoc.source>
+		
+		<!-- Maven PLgins -->
+		<version.maven.plugin.failsafe>2.22.2</version.maven.plugin.failsafe>
+		<version.maven.plugin.surefire>2.22.2</version.maven.plugin.surefire>
+		<version.maven.plugin.resources>3.2.0</version.maven.plugin.resources>
+		<version.maven.plugin.compiler>3.8.1</version.maven.plugin.compiler>
+		<version.maven.plugin.jar>3.2.0</version.maven.plugin.jar>
+		<version.maven.plugin.dependency>2.8</version.maven.plugin.dependency>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<!-- Spring Boot BPM -->
+			<dependency>
+	            <groupId>org.springframework.boot</groupId>
+	            <artifactId>spring-boot-dependencies</artifactId>
+	            <version>${spring-boot.version}</version>
+	            <type>pom</type>
+	            <scope>import</scope>
+	        </dependency>
+			
+			<!-- Jackson BOM -->
+			<dependency>
+				<groupId>com.fasterxml.jackson</groupId>
+				<artifactId>jackson-bom</artifactId>
+				<version>${jackson.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+
+			<!-- Java Drivers -->
+			<dependency>
+				<groupId>com.datastax.oss</groupId>
+				<artifactId>java-driver-core</artifactId>
+				<version>${java-driver.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.datastax.oss</groupId>
+				<artifactId>java-driver-query-builder</artifactId>
+				<version>${java-driver.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.datastax.oss</groupId>
+				<artifactId>java-driver-mapper-runtime</artifactId>
+				<version>${java-driver.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.datastax.oss</groupId>
+				<artifactId>java-driver-mapper-processor</artifactId>
+				<version>${java-driver.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.datastax.oss</groupId>
+				<artifactId>java-driver-metrics-micrometer</artifactId>
+				<version>${java-driver.version}</version>
+			</dependency>
+			
+			<!-- Logging -->
+			<dependency>
+        		<groupId>org.slf4j</groupId>
+        		<artifactId>slf4j-api</artifactId>
+        		<version>${slf4j.version}</version>
+    		</dependency> 
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+			
+			
+			<!-- JUNIT -->
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-api</artifactId>
+				<version>${junit-jupiter.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-engine</artifactId>
+				<version>${junit-jupiter.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-runner</artifactId>
+				<version>${junit-platform.version}</version>
+				<scope>test</scope>
+			</dependency>
+			
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+	
+		<plugins>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${version.maven.plugin.compiler}</version>
+				<configuration>
+					<source>${maven.plugin.compiler.source}</source>
+					<target>${maven.plugin.compiler.target}</target>
+					<showWarnings>false</showWarnings>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${version.maven.plugin.surefire}</version>
+				 <configuration>
+	                <skipTests>false</skipTests>
+	                <testFailureIgnore>true</testFailureIgnore>
+	                <forkMode>once</forkMode>
+            	</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>${version.maven.plugin.dependency}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${version.maven.plugin.jar}</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${version.maven.plugin.resources}</version>
+				<configuration>
+					<escapeString>\</escapeString>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			        
+		</plugins>
+	</build>	
+
+	<organization>
+		<name>DataStax</name>
+		<url>http://datastax.com</url>
+	</organization>
+
+	<licenses>
+		<license>
+			<name>Apache 2</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	
+	<developers>
+		<developer>
+			<id>clunven</id>
+			<name>Cedrick Lunven</name>
+			<email>cedrick.lunven@gmail.com</email>
+			<url>https://github.com/clun</url>
+		</developer>
+	</developers>
+	
+</project>

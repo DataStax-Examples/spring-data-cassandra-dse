@@ -1,2 +1,4 @@
 # spring-data-cassandra-dse
-Samples Codes to work with both
+
+- Deep dive sample codes to work with Spring DATA
+

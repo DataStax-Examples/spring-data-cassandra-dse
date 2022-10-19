@@ -1,0 +1,30 @@
+version: '3'
+services:
+
+  # -- Datastax Enterprise -- 
+  dse:
+    image: datastax/dse-server:6.8.26
+    command: [ -s]
+    ports:
+    - "9042:9042"
+    - "8983:8983"
+    - "8182:8182"
+    environment:
+      DS_LICENSE: accept
+    cap_add:
+    - IPC_LOCK
+    ulimits:
+      memlock: -1
+      
+  # -- Datastax Studio -- 
+  studio:
+    image: datastax/dse-studio:6.8.21
+    ports:
+      - "9091:9091"
+    depends_on:
+      - dse
+    environment:
+      DS_LICENSE: accept
+    volumes:
+      - "./zstudio:/var/lib/datastax-studio"
+      
