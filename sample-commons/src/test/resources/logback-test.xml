@@ -7,7 +7,9 @@
     <root level="WARN">
         <appender-ref ref="STDOUT"/>
     </root>
-    <logger name="t01.connect" level="INFO"/>
+    <logger name="t01.connect"    level="INFO"/>
     <logger name="t02.statements" level="INFO"/>
+    <logger name="t03.repository" level="INFO"/>
+    <logger name="t04.paging" 	  level="INFO"/>
     <logger name="com.datastax.driver"  level="ERROR"/>
 </configuration>

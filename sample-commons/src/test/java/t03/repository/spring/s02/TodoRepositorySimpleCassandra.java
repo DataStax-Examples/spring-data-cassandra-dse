@@ -12,8 +12,7 @@ import com.datastax.oss.driver.api.core.CqlSession;
 
 @Repository
 @SuppressWarnings("unchecked")
-public class TodoRepositorySimpleCassandra 
-    extends SimpleCassandraRepository<TodoEntity, UUID> {
+public class TodoRepositorySimpleCassandra extends SimpleCassandraRepository<TodoEntity, UUID> {
 
     protected final CqlSession cqlSession;
     
@@ -25,6 +24,13 @@ public class TodoRepositorySimpleCassandra
                 .getRequiredPersistentEntity(TodoEntity.class), ops.getConverter()), ops);
         this.cqlSession = cqlSession;
         this.cassandraTemplate = ops;
+    }
+    
+    @Override
+    public TodoEntity save(TodoEntity todo) {
+        // Change Behaviour
+        // ..
+        return cassandraTemplate.insert(todo);
     }
     
     
