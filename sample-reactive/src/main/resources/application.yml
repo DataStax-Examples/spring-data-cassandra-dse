@@ -1,0 +1,13 @@
+server:
+  port: 9966
+  
+spring:
+  application:
+    name: petclinic
+  data:
+    cassandra:
+      schema-action: create-if-not-exists
+      keyspace-name: spring
+      local-datacenter: dc1
+      contact-points:
+      -  localhost:9042

@@ -13,7 +13,6 @@ import com.datastax.oss.driver.api.mapper.MapperContext;
 import com.datastax.oss.driver.api.mapper.entity.EntityHelper;
 import com.datastax.oss.driver.api.mapper.entity.saving.NullSavingStrategy;
 import com.datastax.oss.driver.api.querybuilder.QueryBuilder;
-import com.datastax.samples.ExampleSchema;
 
 /**
  * Query implementation for Comment Dse and Mapper.
@@ -21,7 +20,7 @@ import com.datastax.samples.ExampleSchema;
  * @author DataStax Developer Advocates team.
  */
 @SuppressWarnings("deprecation")
-public class CommentDaoQueryProvider implements CommentDao, ExampleSchema {
+public class CommentDaoQueryProvider implements CommentDao {
 
     private final CqlSession cqlSession;
     
