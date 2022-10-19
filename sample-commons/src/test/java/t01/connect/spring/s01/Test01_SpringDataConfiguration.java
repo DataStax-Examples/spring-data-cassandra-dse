@@ -3,7 +3,6 @@ package t01.connect.spring.s01;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
@@ -18,7 +17,7 @@ import com.datastax.oss.driver.api.core.type.DataTypes;
 import com.datastax.oss.driver.api.querybuilder.SchemaBuilder;
 
 @Configuration
-public class Test01_SpringDataConfiguration extends AbstractCassandraConfiguration implements BeanClassLoaderAware {
+public class Test01_SpringDataConfiguration extends AbstractCassandraConfiguration {
     
     @Value("${spring.data.cassandra.keyspace-name}")
     private String keyspaceName;
